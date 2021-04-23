@@ -5,13 +5,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const NoteWrapper = styled.div`
   background: #dbe2ef;
   border-radius: 7px;
-  box-shadow: 0 2px 5px #ccc;
-  padding: 10px;
-  width: 240px;
-  margin: 16px;
+  padding: 1rem;
+  width: 300px;
+  margin: 1.5rem 2rem;
   float: left;
   > h2 {
-    font-size: 1.1em;
+    font-size: 1.3em;
     margin-bottom: 6px;
   }
   > p {
@@ -30,6 +29,7 @@ const NoteWrapper = styled.div`
   height: 36px;
   cursor: pointer;
   outline: none;
+  background: #dbe2ef;
 }
 `;
 
@@ -40,13 +40,11 @@ const Note = (props) => {
   }
 
   return(
-    <NoteWrapper>
-      <h2> {props.title}</h2>
-      <p> {props.content}</p>
-      <button onClick={handleClick}>
-          <DeleteIcon />
-      </button>
-    </NoteWrapper>
+      <NoteWrapper>
+        <h2>{props.title}</h2>
+        <p>{props.content}</p>
+        <button onClick={handleClick}><DeleteIcon /></button>
+      </NoteWrapper>
   );
 }
 

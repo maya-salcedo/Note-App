@@ -6,12 +6,43 @@ import Zoom from '@material-ui/core/Zoom';
 
 const FormWrapper = styled.form`
   position: relative;
-  width: 480px;
-  margin: 30px auto 20px auto;
+  width: 30rem;
+  margin: 2rem auto;
   background: #fff;
-  padding: 15px;
+  padding: 1rem;
   border-radius: 7px;
   box-shadow: 0 1px 5px rgb(138, 137, 137);
+  @media(max-width: 556px){
+    width: 28rem;
+    margin: 1rem auto;
+  }
+  @media(max-width: 513px){
+    width: 26rem;
+  }
+  @media(max-width: 470px){
+    width: 24rem;
+  }
+  @media(max-width: 441px){
+    width: 22rem;
+  }
+  @media(max-width: 414px){
+    width: 20rem;
+  }
+  @media(max-width: 374px){
+    width: 18rem;
+  }
+  @media(max-width: 345px){
+    width: 16rem;
+  }
+  @media(max-width: 310px){
+    width: 14rem;
+  }
+  @media(max-width: 281px){
+    width: 12rem;
+  }
+  @media(max-width: 246px){
+    width: 10rem;
+  }
   > input, textarea {
     width: 100%;
     border: none;
