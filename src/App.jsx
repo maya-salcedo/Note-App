@@ -1,12 +1,13 @@
 import React from 'react';
 import GlobalStyle from './elements/GlobalStyle';
+import Header from './components/Header';
 import Notes from './components/Notes';
 
 const App = () => {
     return(
       <div>
         <GlobalStyle />
-          <h1>My Notes</h1>
+          <Header text="My Notes" />
           <Notes />
       </div>
     );
