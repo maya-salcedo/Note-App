@@ -25,7 +25,7 @@ const FormWrapper = styled.form`
     position: absolute;
     right: 18px;
     bottom: -18px;
-    background: #f5ba13;
+    background: #3f72af;
     color: #fff;
     border: none;
     border-radius: 50%;

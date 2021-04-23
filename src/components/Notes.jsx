@@ -20,18 +20,18 @@ const Notes = () => {
   }
 
   return (
-      <div>
-        <CreateNote onAdd={addItem} />
-        {items.map((noteItem, index) => {
-            return <Note 
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={deleteItem}
-            />
-        })}
-      </div>);
+    <div>
+      <CreateNote onAdd={addItem} />
+      {items.map((noteItem, index) => {
+        return <Note 
+        key={index}
+        id={index}
+        title={noteItem.title}
+        content={noteItem.content}
+        onDelete={deleteItem}
+        />
+      })}
+    </div>);
 }
 
 export default Notes;
