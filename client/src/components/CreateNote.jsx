@@ -85,11 +85,18 @@ const CreateNote = () => {
     });
   }
 
+  const today = new Date();
+  const date = `${today.getDate()}-${(today.getMonth()+1)}-${today.getFullYear()}`;
+  const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+  const dateTime = `${date} ${time}`;
+
   const postNote = async () => {
+    console.log(dateTime);
     try {
       await axios.post('http://localhost:9000/createNote', {
         NoteTitle: note.title,
-        NoteContent: note.content
+        NoteContent: note.content,
+        DateStamp: dateTime
       });
       window.location = "/";
     } catch (err) {
