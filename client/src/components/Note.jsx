@@ -35,6 +35,8 @@ const NoteWrapper = styled.div`
 
 const Note = (props) => {
 
+  const date = new Date().getDate();
+
   const handleClick = () => {
     props.onDelete(props.id);
   }
@@ -43,6 +45,7 @@ const Note = (props) => {
       <NoteWrapper>
         <h2>{props.title}</h2>
         <p>{props.content}</p>
+        <h6>Added on {date}</h6>
         <button onClick={handleClick}><DeleteIcon /></button>
       </NoteWrapper>
   );
