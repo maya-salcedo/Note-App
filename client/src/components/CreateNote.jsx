@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
+import axios from "axios";
 
 const FormWrapper = styled.form`
   position: relative;
@@ -68,7 +69,7 @@ const FormWrapper = styled.form`
   }
 `;
 
-const CreateNote = (props) => {
+const CreateNote = () => {
 
   const [isExpanded, setExpanded] = useState(false);
 
@@ -78,23 +79,24 @@ const CreateNote = (props) => {
   });
 
   const handleChange = (event) => {
-    const {name, value} = event.target;
-
-    setNote(prevNote => {
-      return {
-        ...prevNote,
-        [name]: value
-      };
+    setNote({
+      ...note,
+      [event.target.name]: event.target.value
     });
+    console.log(note);
   }
 
-  const submitNote = (event) => {
-    props.onAdd(note); //equivalent to calling the addNote in App.jsx
-    setNote({
-      title: "",
-      content: ""
-    })
-    event.preventDefault();
+  const postNote = async () => {
+    console.log(note.title);
+    console.log(note.content);
+    try {
+      await axios.post('http://localhost:9000/createNote', {
+        NoteTitle: note.title,
+        NoteContent: note.content
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const expand = () => {
@@ -108,6 +110,7 @@ const CreateNote = (props) => {
           name="title" 
           onChange={handleChange} 
           value={note.title} 
+          type="text"
           placeholder="Title" />)}
       
       <textarea 
@@ -115,10 +118,11 @@ const CreateNote = (props) => {
           onClick={expand}
           onChange={handleChange} 
           value={note.content} 
+          type="text"
           placeholder="Take a note..." 
           rows={isExpanded ? 3 : 1}  />
       <Zoom in={isExpanded}>
-      <Fab onClick={submitNote}><AddIcon /></Fab>
+      <Fab onClick={postNote}><AddIcon /></Fab>
       </Zoom>
     </FormWrapper>
   </div>
