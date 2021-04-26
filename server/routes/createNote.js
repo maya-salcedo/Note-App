@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const { NoteTitle, NoteContent} = req.body;
+    const { NoteTitle, NoteContent, DateStamp} = req.body;
     const newNote = await pool.query(
-      "INSERT INTO notes(title, content) VALUES($1,$2) RETURNING *", [NoteTitle, NoteContent]
+      "INSERT INTO notes(title, content, dateStamp) VALUES($1,$2,$3) RETURNING *", [NoteTitle, NoteContent, DateStamp]
     );
     res.json(newNote.rows[0])
   } catch (err) {
@@ -27,7 +27,6 @@ router.get("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const deleteNote = await pool.query(
       "DELETE FROM notes WHERE id = $1 RETURNING *", [id]);
     res.json(deleteNote.rows[0]);

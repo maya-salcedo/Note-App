@@ -5,5 +5,6 @@
 CREATE TABLE notes(
     id SERIAL PRIMARY KEY,
     title VARCHAR(10000),
-    content VARCHAR(100000) NOT NULL
+    content VARCHAR(100000) NOT NULL,
+    datestamp VARCHAR(50)
 );

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Note from './Note';
 import axios from 'axios';
 
-
 const AllNotesWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -26,7 +25,6 @@ const Notes = () => {
   }
 
   const deleteItem = async id => {
-    console.log(id);
     try {
       await axios.delete(`http://localhost:9000/createNote/${id}`);
       window.location = "/";
@@ -48,6 +46,7 @@ const Notes = () => {
           id={noteItem.id}
           title={noteItem.title}
           content={noteItem.content}
+          dateStamp={noteItem.datestamp}
           onDelete={deleteItem}
           />
         })}
