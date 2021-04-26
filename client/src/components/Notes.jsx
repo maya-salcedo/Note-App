@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import Note from "./Note";
-import CreateNote from "./CreateNote";
+import Note from './Note';
+import axios from 'axios';
+
 
 const AllNotesWrapper = styled.div`
   display: flex;
@@ -13,30 +14,38 @@ const AllNotesWrapper = styled.div`
 `;
 
 const Notes = () => {
-  const [items, setItems] = useState([]);
+  const [list, setList] = useState([]);
 
-  const addItem = (newItem) => {
-    setItems(prevItems => {
-        return [...prevItems, newItem];
-    });
+  const getList = async () => {
+    try {
+      const { data } = await axios.get('http://localhost:9000/createNote');
+      setList(data);
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 
-  const deleteItem = (id) => {
-    setItems(prevItems => {
-        return prevItems.filter((noteItem, index) => {
-            return index !== id;
-        });
-    });
+  const deleteItem = async id => {
+    console.log(id);
+    try {
+      await axios.delete(`http://localhost:9000/createNote/${id}`);
+      window.location = "/";
+    } catch (err) {
+      console.error(err.message);
+    }
   }
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   return (
     <div>
-      <CreateNote onAdd={addItem} />
       <AllNotesWrapper>
-        {items.map((noteItem, index) => {
+        {list.map((noteItem) => {
           return <Note 
-          key={index}
-          id={index}
+          key={noteItem.id}
+          id={noteItem.id}
           title={noteItem.title}
           content={noteItem.content}
           onDelete={deleteItem}

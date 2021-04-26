@@ -42,7 +42,7 @@ const Note = (props) => {
   }
 
   return(
-      <NoteWrapper>
+      <NoteWrapper key={props.id}>
         <h2>{props.title}</h2>
         <p>{props.content}</p>
         <h6>Added on {date}</h6>
