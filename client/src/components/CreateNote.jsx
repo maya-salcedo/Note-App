@@ -83,17 +83,15 @@ const CreateNote = () => {
       ...note,
       [event.target.name]: event.target.value
     });
-    console.log(note);
   }
 
   const postNote = async () => {
-    console.log(note.title);
-    console.log(note.content);
     try {
       await axios.post('http://localhost:9000/createNote', {
         NoteTitle: note.title,
         NoteContent: note.content
       });
+      window.location = "/";
     } catch (err) {
       console.log(err);
     }
