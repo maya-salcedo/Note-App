@@ -91,9 +91,8 @@ const CreateNote = () => {
   const dateTime = `${date} ${time}`;
 
   const postNote = async () => {
-    console.log(dateTime);
     try {
-      await axios.post('http://localhost:9000/createNote', {
+      await axios.post('/api/createNote', {
         NoteTitle: note.title,
         NoteContent: note.content,
         DateStamp: dateTime
