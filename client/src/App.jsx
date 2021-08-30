@@ -5,14 +5,14 @@ import Notes from './components/Notes';
 import CreateNote from './components/CreateNote';
 
 const App = () => {
-  return(
+  return (
     <div>
       <GlobalStyle />
-        <Header text="My Notes" />
-        <CreateNote />
-        <Notes />
+      <Header />
+      <CreateNote />
+      <Notes />
     </div>
   );
-}
-  
+};
+
 export default App;
