@@ -17,7 +17,7 @@ const Notes = () => {
 
   const getList = async () => {
     try {
-      const { data } = await axios.get('/api/createNote');
+      const { data } = await axios.get('/api/note');
       setList(data);
     } catch (err) {
       console.error(err.message);
@@ -26,7 +26,7 @@ const Notes = () => {
 
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`/api/createNote/${id}`);
+      await axios.delete(`/api/note/${id}`);
       window.location = '/';
     } catch (err) {
       console.error(err.message);

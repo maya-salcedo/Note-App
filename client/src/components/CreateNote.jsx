@@ -93,7 +93,7 @@ const CreateNote = () => {
 
   const addNote = async () => {
     try {
-      await axios.post('/api/createNote', {
+      await axios.post('/api/note', {
         NoteTitle: note.title,
         NoteContent: note.content,
         DateStamp: dateTimeNow,
