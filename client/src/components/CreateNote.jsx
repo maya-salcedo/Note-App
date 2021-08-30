@@ -85,20 +85,18 @@ const CreateNote = () => {
     });
   };
 
-  const today = new Date();
-  const date = `${today.getDate()}-${
-    today.getMonth() + 1
-  }-${today.getFullYear()}`;
-  const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
-  const dateTime = `${date} ${time}`;
+  const now = new Date();
+  // format: dd-mm-yyyy hh:mm:ss
+  const dateTimeNow = `${now.getDate()}-${
+    now.getMonth() + 1
+  }-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
-  const postNote = async () => {
-    console.log(dateTime);
+  const addNote = async () => {
     try {
       await axios.post('/api/createNote', {
         NoteTitle: note.title,
         NoteContent: note.content,
-        DateStamp: dateTime,
+        DateStamp: dateTimeNow,
       });
       window.location = '/';
     } catch (err) {
@@ -122,7 +120,6 @@ const CreateNote = () => {
             placeholder="Title"
           />
         )}
-
         <textarea
           name="content"
           onClick={expand}
@@ -133,7 +130,7 @@ const CreateNote = () => {
           rows={isExpanded ? 3 : 1}
         />
         <Zoom in={isExpanded}>
-          <Fab onClick={postNote}>
+          <Fab onClick={addNote}>
             <AddIcon />
           </Fab>
         </Zoom>
