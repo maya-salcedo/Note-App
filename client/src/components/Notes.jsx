@@ -24,7 +24,7 @@ const Notes = () => {
     }
   };
 
-  const deleteItem = async (id) => {
+  const deleteNote = async (id) => {
     try {
       await axios.delete(`/api/note/${id}`);
       window.location = '/';
@@ -38,22 +38,20 @@ const Notes = () => {
   }, []);
 
   return (
-    <div>
-      <AllNotesWrapper>
-        {list.map((noteItem) => {
-          return (
-            <Note
-              key={noteItem.id}
-              id={noteItem.id}
-              title={noteItem.title}
-              content={noteItem.content}
-              dateStamp={noteItem.datestamp}
-              onDelete={deleteItem}
-            />
-          );
-        })}
-      </AllNotesWrapper>
-    </div>
+    <AllNotesWrapper>
+      {list.map((noteItem) => {
+        return (
+          <Note
+            key={noteItem.id}
+            id={noteItem.id}
+            title={noteItem.title}
+            content={noteItem.content}
+            dateStamp={noteItem.datestamp}
+            onDelete={deleteNote}
+          />
+        );
+      })}
+    </AllNotesWrapper>
   );
 };
 
