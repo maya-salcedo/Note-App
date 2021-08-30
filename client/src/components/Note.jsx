@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -18,7 +18,7 @@ const NoteWrapper = styled.div`
     margin-bottom: 10px;
     white-space: pre-wrap;
     word-wrap: break-word;
-  } 
+  }
   > h6 {
     color: #3f72af;
     position: relative;
@@ -37,23 +37,27 @@ const NoteWrapper = styled.div`
     cursor: pointer;
     outline: none;
     background: #dbe2ef;
-}
+    &:hover {
+      color: #112d4e;
+    }
+  }
 `;
 
 const Note = (props) => {
-
   const handleClick = () => {
     props.onDelete(props.id);
-  }
+  };
 
-  return(
-      <NoteWrapper key={props.id}>
-        <h2>{props.title}</h2>
-        <p>{props.content}</p>
-        <h6>Added on {props.dateStamp}</h6>
-        <button onClick={handleClick}><DeleteIcon /></button>
-      </NoteWrapper>
+  return (
+    <NoteWrapper key={props.id}>
+      <h2>{props.title}</h2>
+      <p>{props.content}</p>
+      <h6>Added on {props.dateStamp}</h6>
+      <button onClick={handleClick}>
+        <DeleteIcon />
+      </button>
+    </NoteWrapper>
   );
-}
+};
 
-export default Note; 
+export default Note;

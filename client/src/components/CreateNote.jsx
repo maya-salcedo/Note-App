@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
-import axios from "axios";
+import axios from 'axios';
 
 const FormWrapper = styled.form`
   position: relative;
@@ -13,38 +13,39 @@ const FormWrapper = styled.form`
   padding: 1rem;
   border-radius: 7px;
   box-shadow: 0 1px 5px rgb(138, 137, 137);
-  @media(max-width: 556px){
+  @media (max-width: 556px) {
     width: 28rem;
     margin: 1rem auto;
   }
-  @media(max-width: 513px){
+  @media (max-width: 513px) {
     width: 26rem;
   }
-  @media(max-width: 470px){
+  @media (max-width: 470px) {
     width: 24rem;
   }
-  @media(max-width: 441px){
+  @media (max-width: 441px) {
     width: 22rem;
   }
-  @media(max-width: 414px){
+  @media (max-width: 414px) {
     width: 20rem;
   }
-  @media(max-width: 374px){
+  @media (max-width: 374px) {
     width: 18rem;
   }
-  @media(max-width: 345px){
+  @media (max-width: 345px) {
     width: 16rem;
   }
-  @media(max-width: 310px){
+  @media (max-width: 310px) {
     width: 14rem;
   }
-  @media(max-width: 281px){
+  @media (max-width: 281px) {
     width: 12rem;
   }
-  @media(max-width: 246px){
+  @media (max-width: 246px) {
     width: 10rem;
   }
-  > input, textarea {
+  > input,
+  textarea {
     width: 100%;
     border: none;
     padding: 4px;
@@ -70,68 +71,72 @@ const FormWrapper = styled.form`
 `;
 
 const CreateNote = () => {
-
   const [isExpanded, setExpanded] = useState(false);
 
   const [note, setNote] = useState({
-    title: "",
-    content: ""
+    title: '',
+    content: '',
   });
 
   const handleChange = (event) => {
     setNote({
       ...note,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
-  }
+  };
 
-  const today = new Date();
-  const date = `${today.getDate()}-${(today.getMonth()+1)}-${today.getFullYear()}`;
-  const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
-  const dateTime = `${date} ${time}`;
+  const now = new Date();
+  // format: dd-mm-yyyy hh:mm:ss
+  const dateTimeNow = `${now.getDate()}-${
+    now.getMonth() + 1
+  }-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
-  const postNote = async () => {
-    console.log(dateTime);
+  const addNote = async () => {
     try {
-      await axios.post('http://localhost:9000/createNote', {
+      await axios.post('/api/note', {
         NoteTitle: note.title,
         NoteContent: note.content,
-        DateStamp: dateTime
+        DateStamp: dateTimeNow,
       });
-      window.location = "/";
+      window.location = '/';
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const expand = () => {
-      setExpanded(true);
-  }
+    setExpanded(true);
+  };
 
   return (
-  <div>
-    <FormWrapper>
-    {isExpanded && (<input 
-          name="title" 
-          onChange={handleChange} 
-          value={note.title} 
-          type="text"
-          placeholder="Title" />)}
-      
-      <textarea 
-          name="content" 
+    <div>
+      <FormWrapper>
+        {isExpanded && (
+          <input
+            name="title"
+            onChange={handleChange}
+            value={note.title}
+            type="text"
+            placeholder="Title"
+          />
+        )}
+        <textarea
+          name="content"
           onClick={expand}
-          onChange={handleChange} 
-          value={note.content} 
+          onChange={handleChange}
+          value={note.content}
           type="text"
-          placeholder="Take a note..." 
-          rows={isExpanded ? 3 : 1}  />
-      <Zoom in={isExpanded}>
-      <Fab onClick={postNote}><AddIcon /></Fab>
-      </Zoom>
-    </FormWrapper>
-  </div>
-);
-}
+          placeholder="Take a note..."
+          rows={isExpanded ? 3 : 1}
+        />
+        <Zoom in={isExpanded}>
+          <Fab onClick={addNote}>
+            <AddIcon />
+          </Fab>
+        </Zoom>
+      </FormWrapper>
+    </div>
+  );
+};
 
 export default CreateNote;

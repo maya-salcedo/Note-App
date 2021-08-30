@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Note from './Note';
 import axios from 'axios';
@@ -17,42 +17,42 @@ const Notes = () => {
 
   const getList = async () => {
     try {
-      const { data } = await axios.get('http://localhost:9000/createNote');
+      const { data } = await axios.get('/api/note');
       setList(data);
     } catch (err) {
       console.error(err.message);
     }
-  }
+  };
 
-  const deleteItem = async id => {
+  const deleteNote = async (id) => {
     try {
-      await axios.delete(`http://localhost:9000/createNote/${id}`);
-      window.location = "/";
+      await axios.delete(`/api/note/${id}`);
+      window.location = '/';
     } catch (err) {
       console.error(err.message);
     }
-  }
+  };
 
   useEffect(() => {
     getList();
   }, []);
 
   return (
-    <div>
-      <AllNotesWrapper>
-        {list.map((noteItem) => {
-          return <Note 
-          key={noteItem.id}
-          id={noteItem.id}
-          title={noteItem.title}
-          content={noteItem.content}
-          dateStamp={noteItem.datestamp}
-          onDelete={deleteItem}
+    <AllNotesWrapper>
+      {list.map((noteItem) => {
+        return (
+          <Note
+            key={noteItem.id}
+            id={noteItem.id}
+            title={noteItem.title}
+            content={noteItem.content}
+            dateStamp={noteItem.datestamp}
+            onDelete={deleteNote}
           />
-        })}
-      </AllNotesWrapper>
-      
-    </div>);
-}
+        );
+      })}
+    </AllNotesWrapper>
+  );
+};
 
 export default Notes;
